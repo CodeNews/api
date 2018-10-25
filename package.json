@@ -1,0 +1,34 @@
+{
+  "name": "apicodenews",
+  "version": "1.0.0",
+  "description": "https://github.com/serverless/serverless",
+  "main": "handler.js",
+  "scripts": {
+    "deploy": "serverless deploy --aws-profile codenews",
+    "debug": "node --inspect ./node_modules/serverless/bin/serverless offline start",
+    "offline": "serverless offline start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/tindin/serverless.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/tindin/serverless/issues"
+  },
+  "homepage": "https://gitlab.com/tindin/serverless#README",
+  "devDependencies": {
+    "serverless": "^1.32.0",
+    "serverless-nested-stack": "0.0.7",
+    "serverless-offline": "^3.25.4"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.259.1",
+    "axios": "^0.18.0",
+    "cep-promise": "^3.0.3",
+    "dynamodb-doc": "^1.0.0",
+    "moment": "^2.22.2",
+    "mongodb": "^3.1.1"
+  }
+}
