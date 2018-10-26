@@ -14,6 +14,25 @@ functions:
           path: posts
           method: get
           cors: true
+      - http:
+          path: posts
+          method: post
+          cors: true
+      - http:
+          path: posts
+          method: delete
+          cors: true
+      - http:
+          path: posts/draft
+          method: post
+          cors: true
+  contributors:
+    handler: handler.contributors
+    events:
+      - http:
+          path: contributors
+          method: get
+          cors: true
 
 plugins:
   - serverless-offline
