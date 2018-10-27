@@ -7,15 +7,13 @@ const tableContributors = 'contributors'
 
 module.exports = async (event, context) => {
   const params = event.queryStringParameters || {}
-  const body = JSON.parse(event.body)
+  const body = util.parseAndClean(JSON.parse(event.body))
 
   if (!params.token) return util.bind(new Error('Informe o token do contribuidor!'))
   if (!body.title) return util.bind(new Error('Informe o título do post!'))
   if (!body.author) return util.bind(new Error('Informe o autor original do post!'))
-  if (!body.category) return util.bind(new Error('Informe a categoria do post!'))
-  if (!body.category_class) return util.bind(new Error('Informe a classe da categoria do post!'))
+  if (!body.tags) return util.bind(new Error('Informe uma ou mais tag do post!'))
   if (!body.image) return util.bind(new Error('Informe a image do post!'))
-  if (!body.url_complete) return util.bind(new Error('Informe a URL do post!'))
   if (!body.description) return util.bind(new Error('Digite o conteúdo do post!'))
 
   try {

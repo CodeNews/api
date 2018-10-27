@@ -26,6 +26,14 @@ functions:
           path: posts/draft
           method: post
           cors: true
+      - http:
+          path: posts/tags
+          method: get
+          cors: true
+      - http:
+          path: posts/tags
+          method: post
+          cors: true
   contributors:
     handler: handler.contributors
     events:
