@@ -1,4 +1,5 @@
 const mongodb = require('../lib/mongodb')
+const moment = require('moment')
 const ObjectId = require('mongodb').ObjectId
 const util = require('../lib/util')
 const tablePosts = 'posts'
@@ -28,6 +29,14 @@ module.exports = async (event, context) => {
       filter._id = ObjectId(params.id)
       data = await mongodb(tablePosts).findOne(filter)
       data.contributor = await mongodb(tableContributors).findOne({ _id: data.contributor })
+      await mongodb(tablePosts).update(filter, { $inc: { clicks: 1 } })
+    } else if (params.primary) {
+      const weekOld = moment().add(-7, 'days').valueOf()
+      data = await mongodb(tablePosts).find({
+        datetime: {
+          $gt: weekOld
+        }
+      }).sort({ clicks: -1 }).toArray()
     } else {
       data = await mongodb(tablePosts).find(filter).toArray()
     }
