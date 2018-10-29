@@ -34,6 +34,10 @@ functions:
           path: posts/tags
           method: post
           cors: true
+      - http:
+          path: posts/load
+          method: post
+          cors: true
   contributors:
     handler: handler.contributors
     events:
