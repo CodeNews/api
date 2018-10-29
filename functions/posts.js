@@ -38,7 +38,7 @@ module.exports = async (event, context) => {
         }
       }).sort({ clicks: -1 }).toArray()
     } else {
-      data = await mongodb(tablePosts).find(filter).toArray()
+      data = await mongodb(tablePosts).find(filter).sort({ datetime: -1 }).toArray()
     }
 
     return util.bind({ message: 'success listed', data: data })
