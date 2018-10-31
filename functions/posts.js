@@ -37,8 +37,16 @@ module.exports = async (event, context) => {
           $gt: weekOld
         }
       }).sort({ clicks: -1 }).toArray()
+    } else if (params.q) {
+      data = await mongodb(tablePosts).find({
+        title: { $regex: `.*${params.q}.*`, $options: 'i' }
+      }).sort({ datetime: -1 }).limit(100).toArray()
+    } else if (params.filter) {
+      data = await mongodb(tablePosts).find({
+        'tags._id': { $in: params.filter.split(',') }
+      }).sort({ datetime: -1 }).limit(100).toArray()
     } else {
-      data = await mongodb(tablePosts).find(filter).sort({ datetime: -1 }).toArray()
+      data = await mongodb(tablePosts).find(filter).sort({ datetime: -1 }).limit(100).toArray()
     }
 
     return util.bind({ message: 'success listed', data: data })
