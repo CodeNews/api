@@ -35,6 +35,8 @@ module.exports = async (event, context) => {
         body.contributor = postOrigem.contributor
         await mongodb(tablePosts).update({ _id: id }, body)
       } else {
+        const postFound = await mongodb(tablePosts).findOne({ url_complete: body.url_complete })
+        if (postFound && postFound._id) return util.bind(new Error('Este post com essa URL já foi publicado!'))
         const contributor = await mongodb(tableContributors).findOne({ key: params.token })
         body.contributor = contributor._id
         body.datetime = new Date().getTime()
